@@ -55,9 +55,17 @@ function handleScreenshot(filePath) {
     `[ArenaRecorder] Detected arena start screenshot → Starting recording (${filePath})`;
   console.log(msg)
 
-  const cmd = bRecording ? `StopRecord` : `StartRecord`;
-  obs.call(cmd)
-  bRecording = cmd === `StartRecord`;
+  // const cmd = bRecording ? `StopRecord` : `StartRecord`;
+  // obs.call(cmd)
+  // bRecording = cmd === `StartRecord`;
+
+
+  try {
+    obs.call(`ToggleRecord`);
+    bRecording = !bRecording;
+  } catch (error) {
+    console.log(`[ArenaRecorder] Detected error:`, error);
+  }
 }
 
 // Watcher
