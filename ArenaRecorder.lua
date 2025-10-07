@@ -1,5 +1,5 @@
 local f = CreateFrame("Frame")
-local screenshotDelay = 5
+local screenshotDelay = 2
 
 local function TakeScreenshot(isInArena)
   local msg = isInArena
@@ -10,26 +10,27 @@ local function TakeScreenshot(isInArena)
   Screenshot()
 end
 
-local function HandleArenaStateChange(isInArena)
-  C_Timer.After(screenshotDelay, function() TakeScreenshot(isInArena) end)
-end
+local ArenaRecorder_LastInstanceType = ""
 
 -- Event: PLAYER_ENTERING_WORLD
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self, event)
   -- Store last known instance type to detect transitions
-  local ArenaRecorder_LastInstanceType = nil
 
-  if event == "PLAYER_ENTERING_WORLD" then
-    local isInstance, instanceType = IsInInstance()
-    if isInstance and instanceType == "arena" then
-      HandleArenaStateChange(true)
-    elseif ArenaRecorder_LastInstanceType == "arena" and instanceType ~= "arena" then
-      HandleArenaStateChange(false)
+  C_Timer.After(screenshotDelay, function()
+    if event == "PLAYER_ENTERING_WORLD" then
+      local isInstance, instanceType = IsInInstance()
+      print("|cFF00FF00[ArenaRecorder]|r instanceType: " .. instanceType)
+      print("|cFF00FF00[ArenaRecorder]|r ArenaRecorder_LastInstanceType: " .. ArenaRecorder_LastInstanceType)
+      if isInstance and instanceType == "arena" then
+        TakeScreenshot(true)
+      elseif ArenaRecorder_LastInstanceType == "arena" and instanceType ~= "arena" then
+        TakeScreenshot(false)
+      end
+
+      ArenaRecorder_LastInstanceType = instanceType
     end
-
-    ArenaRecorder_LastInstanceType = instanceType
-  end
+  end)
 end)
 
 -- ==========================================================
