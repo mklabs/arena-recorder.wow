@@ -113,5 +113,5 @@ You should see a log output like:
 [ArenaRecorder] Watching folder ...
 ```
 
-If not check if OBS and running and the .env configuration.
+If not check if OBS is running and the .env configuration.
 
