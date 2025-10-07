@@ -1,0 +1,18 @@
+{
+  "name": "arena-recorder",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "description": "Companion script to ArenaRecorder wow addon",
+  "dependencies": {
+    "chokidar": "^4.0.3",
+    "dotenv": "^17.2.3",
+    "obs-websocket-js": "^5.0.6"
+  }
+}

@@ -1,0 +1,7 @@
+## Interface: 50100
+## Title: Arena Recorder
+## Notes: Takes screenshots on arena start and end to signal external recorder
+## Author: You
+## Version: 1.0
+
+ArenaRecorder.lua
